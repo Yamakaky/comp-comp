@@ -97,7 +97,6 @@ function hull_calculation {
           | sed -re 's/^ *([^ ]+) *([^ ]+) *$/\1 \2 /' \
           | sort -n)
 
-        echo "$hull"
         for file in res/*.$ext; do
             best=$(join -t- -j1 <(sort -n "$file") <(echo "$hull"))
             echo "$best" > $file

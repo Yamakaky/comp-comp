@@ -1,3 +1,12 @@
-# Run the test
+## Dependencies
 
-    ./test_comp.sh && gnuplot -p graph.gnuplot
+- qhull
+- zip
+- lzip
+- bzip2
+- gzip
+- xz
+
+## Run the test
+
+    $ ./test_comp.sh && gnuplot -p graph.gnuplot
