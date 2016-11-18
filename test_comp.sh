@@ -6,6 +6,8 @@ export LC_ALL="en_US.UTF-8"
 export TIMEFORMAT="%R"
 
 dir=$(mktemp -d)
+algos=("zip" "gz" "lzip" "xz" "bz2")
+bins=("zip" "gzip" "lzip" "xz" "bzip2" "qhull")
 
 function finish {
     cd
@@ -108,9 +110,21 @@ function size {
     wc -c $1 | cut -d' ' -f 1
 }
 
+function check_deps {
+    set +e
+    for algo in ${bins[@]}; do
+        which "$algo" > /dev/null 2>&1
+        if [[ $? != 0 ]]; then
+            echo "$algo must be installed"
+            exit 1
+        fi
+    done
+    set -e
+}
+
 function main {
-    algos=("zip" "gz" "lzip" "xz" "bz2")
-    #algos=("zip" "bz2")
+    check_deps
+
     rm -rf res
     mkdir -p res
 
